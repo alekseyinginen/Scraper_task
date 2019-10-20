@@ -37,7 +37,7 @@ class Scraper
     def page_counter(page)
         url = page_url
         url += "/?p=#{page}" unless page == 1
-        category_page_xml = convet_page_to_xml(url)
+        convet_page_to_xml(url)
     end
 
     def convet_page_to_xml(url)
@@ -45,7 +45,7 @@ class Scraper
         page = Curl.get(url) do |http|
             http.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
         end
-        convet_page_to_xml = Nokogiri::HTML(page.body_str)
+        Nokogiri::HTML(page.body_str)
     end
 
     def items_param(item_page_url)
@@ -64,7 +64,6 @@ class Scraper
             item_param.each do |item_params|
                 csv << item_params
             end
-            puts "done, filename: #{filename}"
         end
     end
 end
